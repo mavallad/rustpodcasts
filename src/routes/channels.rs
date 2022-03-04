@@ -4,7 +4,7 @@ use serde::Serialize;
 
 pub async fn list_channel_summaries() -> web::Json<Vec<ChannelSummary>> {
     let channel = ChannelSummary {
-        id: "34fasf-fadsf-dfas".to_string(),
+        id: 1i64,
         name: "test channel".to_string(),
         description: "a test channel".to_string(),
         url: "https://test.channel.com/testing".to_string(),
@@ -21,7 +21,7 @@ pub async fn list_channel_summaries() -> web::Json<Vec<ChannelSummary>> {
 
 #[derive(Serialize)]
 pub struct ChannelSummary {
-    id: String,
+    id: i64,
     name: String,
     description: String,
     url: String,
