@@ -1,22 +1,21 @@
 use actix_web::web;
 use chrono::NaiveDate;
 use serde::Serialize;
+use sqlx::{PgPool};
 
-pub async fn list_channel_summaries() -> web::Json<Vec<ChannelSummary>> {
-    let channel = ChannelSummary {
-        id: 1i64,
-        name: "test channel".to_string(),
-        description: "a test channel".to_string(),
-        url: "https://test.channel.com/testing".to_string(),
-        lang: "en".to_string(),
-        icon_path: "images/icon/path/image.jpg".to_string(),
-        active: true,
-        last_episode_title: "my last episode".to_string(),
-        last_episode_date: NaiveDate::from_ymd(2020, 10, 20),
-        number_episodes: 10        
-    };
-    let channels = vec![channel];
-    web::Json(channels)
+pub async fn list_channel_summaries(pool: web::Data<PgPool>) -> web::Json<Vec<ChannelSummary>> {
+    let records = sqlx::query_as!(
+            ChannelSummary,
+            "select id, name, description, url, lang, icon_path, active, null as last_episode_title, null::DATE as last_episode_date, 0::INT as count_episodes from channels")
+        .fetch_all(pool.get_ref())
+        .await;
+    web::Json(match records {
+        Ok(channels) => channels,
+        Err(error) => {
+            eprintln!("ERROR IN QUERY: {}", error);
+            vec![]
+        }
+    })
 }
 
 #[derive(Serialize)]
@@ -28,7 +27,7 @@ pub struct ChannelSummary {
     lang: String,
     icon_path: String,
     active: bool,
-    last_episode_title: String,
-    last_episode_date: NaiveDate,
-    number_episodes: u8
+    last_episode_title: Option<String>,
+    last_episode_date: Option<NaiveDate>,
+    count_episodes: Option<i32>
 }
