@@ -13,9 +13,9 @@ pub struct DatabaseSettings {
     pub database_name: String,
 }
 
-pub fn get_configuration() -> Result<Settings, config::ConfigError> {
+pub fn get_configuration(config_file_path: &str) -> Result<Settings, config::ConfigError> {
     let settings = config::Config::builder()
-        .add_source(config::File::with_name("config/configuration"))
+        .add_source(config::File::with_name(config_file_path))
         .build()
         .unwrap();
     settings.try_deserialize()

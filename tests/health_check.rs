@@ -25,7 +25,7 @@ async fn health_check_works() {
 #[tokio::test]
 async fn list_channels_returns_200_with_list_of_channels() {
     let app = spawn_app().await;
-    let configuration = get_configuration().expect("Failed to read configuration");
+    let configuration = get_configuration("tests/config/configuration.yaml").expect("Failed to read configuration");
     let connection_string = configuration.database.connection_string();
     println!("CONNECTION: {}", configuration.database.connection_string());
     let mut connection = PgConnection::connect(&connection_string)
@@ -35,7 +35,7 @@ async fn list_channels_returns_200_with_list_of_channels() {
     sqlx::query!(
             r#"
             INSERT INTO channels (name, description, url, lang, icon_path, active)
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING
             "#,
             "::name::".to_string(),
             "::description::".to_string(),
@@ -77,7 +77,7 @@ async fn spawn_app() -> TestApp {
         .expect("Failed to bind random port");
     let port = listener.local_addr().unwrap().port();
     let address = format!("http://127.0.0.1:{}", port);
-    let configuration = get_configuration().expect("Failed to read configuration");
+    let configuration = get_configuration("tests/config/configuration").expect("Failed to read configuration");
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
         .await
         .expect("Failed to connect to postgres");
