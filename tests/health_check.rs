@@ -1,9 +1,9 @@
-use sqlx::{PgConnection, Connection};
+use sqlx::{PgConnection, Connection, PgPool};
+use chrono::NaiveDate;
 use rustpodcasts::configuration::get_configuration;
 use std::net:: TcpListener;
 use reqwest::header::HeaderValue;
 use rustpodcasts::startup::run;
-use sqlx::PgPool;
 
 #[tokio:: test]
 async fn health_check_works() {
@@ -40,7 +40,7 @@ async fn list_channels_returns_200_with_list_of_channels() {
             "::name::".to_string(),
             "::description::".to_string(),
             "::url::".to_string(),
-            "::lang::".to_string(),
+            "en".to_string(),
             "::icon_path::".to_string(),
             true
             )
@@ -48,6 +48,25 @@ async fn list_channels_returns_200_with_list_of_channels() {
             .await
             .expect("Failed to insert channel");
             
+    sqlx::query!(
+        r#"
+        INSERT INTO episodes (channel_id, title, guest, description, url, lang, date_published, duration_seconds, icon_path)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT DO NOTHING
+        "#,
+        1,
+        "::title::".to_string(),
+        Option::None as Option<String>,
+        "::description::".to_string(),
+        "::url::".to_string(),
+        "en".to_string(),
+        NaiveDate::from_ymd(2022, 10, 20),
+        400,
+        "::icon_path::".to_string()
+        )
+        .execute(&mut connection)
+        .await
+        .expect("Failed to insert episode");
+    
     let client = reqwest::Client::new();
     
     let response = client
@@ -63,7 +82,7 @@ async fn list_channels_returns_200_with_list_of_channels() {
         Some(&HeaderValue::from_static("application/json")),
         response_headers.get(reqwest::header::CONTENT_TYPE)
     );
-    let expected_body = r#"[{"id":1,"name":"::name::","description":"::description::","url":"::url::","lang":"::lang::","icon_path":"::icon_path::","active":true,"last_episode_title":null,"last_episode_date":null,"count_episodes":0}]"#;
+    let expected_body = r#"[{"channel_id":1,"name":"::name::","lang":"en","icon_path":"::icon_path::","last_episode_id":1,"last_episode_title":"::title::","last_episode_date_published":"2022-10-20","total_episodes":1}]"#;
     assert_eq!(expected_body, response.text().await.expect("Failed to read text of response"));
 }
 

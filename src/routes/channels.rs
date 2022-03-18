@@ -1,13 +1,20 @@
 use actix_web::web;
 use chrono::NaiveDate;
 use serde::Serialize;
-use sqlx::{PgPool};
+use sqlx::PgPool;
 
 pub async fn list_channel_summaries(pool: web::Data<PgPool>) -> web::Json<Vec<ChannelSummary>> {
     let records = sqlx::query_as!(
             ChannelSummary,
-            "select distinct on (e.channel_id) e.id, c.id, c.name, c.description, c.url, c.lang, c.icon_path, c.active, e.channel_id as last_episode_id, e.date_emitted as last_episode_date from episodes e order by e.date_emitted desc"
-            "select  null as last_episode_title, null::DATE as last_episode_date, 0::INT as count_episodes from channels c")
+            "with \
+            last_episodes as (select distinct on (channel_id) id as episode_id, channel_id, title, url, date_published from episodes order by channel_id, date_published), \
+            count_episodes as (select channel_id, count(*) as total_episodes from episodes group by channel_id) \
+            select channels.id as channel_id, channels.name, channels.lang, channels.icon_path, \
+            last_episodes.episode_id as last_episode_id, last_episodes.title as last_episode_title, \
+            last_episodes.date_published as last_episode_date_published, count_episodes.total_episodes \
+            from last_episodes \
+            inner join count_episodes on last_episodes.channel_id = count_episodes.channel_id \
+            inner join channels on count_episodes.channel_id = channels.id")
         .fetch_all(pool.get_ref())
         .await;
     web::Json(match records {
@@ -21,14 +28,12 @@ pub async fn list_channel_summaries(pool: web::Data<PgPool>) -> web::Json<Vec<Ch
 
 #[derive(Serialize)]
 pub struct ChannelSummary {
-    id: i64,
-    name: String,
-    description: String,
-    url: String,
-    lang: String,
-    icon_path: String,
-    active: bool,
+    channel_id: Option<i64>,
+    name: Option<String>,
+    lang: Option<String>,
+    icon_path: Option<String>,
+    last_episode_id: Option<i64>,
     last_episode_title: Option<String>,
-    last_episode_date: Option<NaiveDate>,
-    count_episodes: Option<i32>
+    last_episode_date_published: Option<NaiveDate>,
+    total_episodes: Option<i64>
 }
