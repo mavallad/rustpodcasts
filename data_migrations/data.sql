@@ -22,7 +22,7 @@ true);
 insert into episodes
 (channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
 values
-(1, 'Code[ish] episode 34: An introduction to Rust', 'Carol Nichols, Jake GGoulding',
+(1, 'Code[ish] episode 34: An introduction to Rust', 'Carol Nichols,Jake Goulding',
 'Carol Nichols and Jake Goulding are Rust instructors and enthusiasts, and they join Chris Castle to talk about Rust''s underlying strengths as an ideal blend of simpler languages, like Ruby, with more memory conscious ones, like C',
 'en', 'https://www.heroku.com/podcasts/codeish/34-an-introduction-to-rust', '2019-09-10', 43*60+58,
 'https://heroku-www-files.s3.amazonaws.com/podcasts/uploads/610d8a9b-b983-4670-ad93-88fdf7a929f8/codeish-cover-art.png');
@@ -48,6 +48,15 @@ values
 'KubeOps Tech Talk EP16 ครั้งนี้คุยกันเรื่อง Rust programming language ตามสไตล์ Cloud Native Rustacean พบกับคุณเนตรชวินทร์ สุทธิสันธิ์ ผู้พัฒนาที่ใช้ภาษา Rust',
 'th', 'https://podcasts.kubeops.guru/e/kubeops-tech-talk-ep16-%e0%b8%84%e0%b8%b8%e0%b8%a2%e0%b9%80%e0%b8%a3%e0%b8%b7%e0%b9%88%e0%b8%ad%e0%b8%87-rust-%e0%b8%aa/',
 '2021-05-21', 3600+29*60+37, 'https://pbcdn1.podbean.com/imglogo/image-logo/9845650/kubeops-logo.png');
+
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(1, 'SE-Radio Episode 279: Florian Gilcher on Rust', 'Florian Gilcher',
+'Eberhard talks with Florian Gilcher about the programming language Rust. Rust originates from Mozilla research. Its focus is on system programming and it is often used to replace C or C++. Topics include the concepts behind Rust; concurrent and safe programming; advanced and unique features like ownership and borrowing; the rust type system (which supports other features like traits, generics and macros). The show finishes with: the evolution of Rust based, features of libraries, and how the community works',
+'en', 'https://www.se-radio.net/2017/01/se-radio-episode-279-florian-gilcher-on-rust/',
+'2017-01-10', 3600+10*60+40, 'https://www.se-radio.net/wp-content/uploads/2017/01/fgilcher-100.jpg');
 
 insert into episodes
 (channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)

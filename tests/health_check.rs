@@ -23,7 +23,7 @@ async fn health_check_works() {
 
 
 #[tokio::test]
-async fn list_channels_returns_200_with_list_of_channels() {
+async fn channels_last_episode_returns_200_with_list_of_channels() {
     let app = spawn_app().await;
     let configuration = get_configuration("tests/config/configuration.yaml").expect("Failed to read configuration");
     let connection_string = configuration.database.connection_string();
@@ -70,7 +70,7 @@ async fn list_channels_returns_200_with_list_of_channels() {
     let client = reqwest::Client::new();
     
     let response = client
-        .get(&format!("{}/list_channels", &app.address))
+        .get(&format!("{}/channels_last_episode", &app.address))
         .send()
         .await
         .expect("Failed to execute request.");
