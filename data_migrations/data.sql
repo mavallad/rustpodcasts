@@ -1,22 +1,38 @@
 insert into channels
-(name, description, url, lang, icon_path, active)
+(name, host, description, url, lang, icon_path, active)
 values
-('-', '-', '-', 'en', '-', true);
+('-', null,'-', '-', 'en', '-', true);
 
 insert into channels
-(name, description, url, lang, icon_path, active)
+(name, host, description, url, lang, icon_path, active)
 values
-('New Rustacean',
+('New Rustacean', 'Chris Krycho',
 'This is a podcast about learning the programming language Rust--from scratch!. Created by Chris Krycho. You can hear more about why I''m doing this in e000: Why Am I Here?',
 'https://newrustacean.com/', 'en', '-', false);
 
 
 insert into channels
-(name, description, url, lang, icon_path, active)
+(name, host, description, url, lang, icon_path, active)
 values
-('Building with Rust', 'Chats with folks who work with and within the Rust programming language',
+('Building with Rust', 'Sean Chen', 'Chats with folks who work with and within the Rust programming language',
 'https://anchor.fm/building-with-rust', 'en',
 'https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/production/podcast_uploaded_nologo400/12174063/12174063-1611952651089-34ad25ae71f66.jpg',
+true);
+
+insert into channels
+(name, host, description, url, lang, icon_path, active)
+values
+('The Request for Explanation Podcast', null, 'A weekly discussion of Rust RFCs. This is an unofficial podcast created by Rust community members. 20 minutes once a week discussing a Rust RFC',
+'https://request-for-explanation.github.io/podcast/', 'en',
+'-',
+false);
+
+insert into channels
+(name, host, description, url, lang, icon_path, active)
+values
+('Chats with James', 'James Munns', 'Chats with James is a podcast discussing everything that James or his guests are passionate about. Embedded Systems, the Rust Programming Language, and a variety of other technical topics are the most commonly discussed items',
+'https://jamesmunns.com/podcast/', 'en',
+'-',
 true);
 
 insert into episodes
@@ -57,6 +73,15 @@ values
 'Eberhard talks with Florian Gilcher about the programming language Rust. Rust originates from Mozilla research. Its focus is on system programming and it is often used to replace C or C++. Topics include the concepts behind Rust; concurrent and safe programming; advanced and unique features like ownership and borrowing; the rust type system (which supports other features like traits, generics and macros). The show finishes with: the evolution of Rust based, features of libraries, and how the community works',
 'en', 'https://www.se-radio.net/2017/01/se-radio-episode-279-florian-gilcher-on-rust/',
 '2017-01-10', 3600+10*60+40, 'https://www.se-radio.net/wp-content/uploads/2017/01/fgilcher-100.jpg');
+
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(1, 'SE-Radio Episode 490: Tim McNamara on Rust 2021 Edition', 'Tim McNamara',
+'Tim McNamara, author of Rust in Action, an introduction Rust for programmers who have never used a systems programming language, discusses the top three benefits of Rust and why they make it a performant, reliable and productive programming language. Host Gavin Henry spoke with McNamara about its rich type system, ownership models, memory safety, thread safety, concurrency, UnSafe Rust, build tools, compilers, build times, running Rust with no OS, Rust 2021 edition, Rusts'' future, package managers, managing memory, memory leaks, runtimes, garbage collection, closures, version migrations, static analysis, what''s changed since our 2017 show on Rust, when to use Rust and how Rust compares to C, C++ and Go',
+'en', 'https://www.se-radio.net/2021/12/episode-490-tim-mcnamara-on-rust-2021-edition/',
+'2021-12-15', 50*60+52, 'https://www.se-radio.net/wp-content/uploads/2021/12/tim-mcnamara.jpg');
 
 insert into episodes
 (channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
