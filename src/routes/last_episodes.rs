@@ -29,10 +29,10 @@ pub struct LastEpisode {
     channel_id: i64,
     channel_name: String,
     title: String,
-    description: Option<String>,
+    description: String,
     lang: String,
     url: String,
     channel_icon_path: String,
-    date_published: Option<NaiveDate>,
-    duration_seconds: Option<i32>
+    date_published: NaiveDate,
+    duration_seconds: i32
 }

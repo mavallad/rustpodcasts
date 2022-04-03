@@ -74,7 +74,6 @@ values
 'en', 'https://www.se-radio.net/2017/01/se-radio-episode-279-florian-gilcher-on-rust/',
 '2017-01-10', 3600+10*60+40, 'https://www.se-radio.net/wp-content/uploads/2017/01/fgilcher-100.jpg');
 
-
 insert into episodes
 (channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
 values
@@ -90,3 +89,31 @@ values
 'Today''s show is pretty meta. You can skip it if you just want to start with something more technical, but I thought listeners might want to know a little about the origins of the show and my own background, so that''s what you get today',
 'en', 'https://newrustacean.com/show_notes/e000/index.html', '2015-09-24', 17*60+11,
 'https://newrustacean.com/podcast.png');
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(1, 'Humans of Open Source: Niko Matsakis on how Rust has Matured', 'Niko Matsakis',
+'Niko Matsakis works at Mozilla as a Principle Research Engineer and has been working on Rust since 2011. In that time he''s seen the language and the community go through many changes.
+We discuss topics such as what features have come and gone in the language, how to continue fostering the culture of the community, and struggling with work-life balance when you just really love your job',
+'en', 'https://anchor.fm/humans-of-open-source/episodes/Niko-Matsakis-on-how-Rust-has-Matured-emh819',
+'2020-11-07', 46*60+10, 'https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo400/10693218/57d56c07c6002d65.jpeg');
+
+
+
+
+
+-- https://cppcast.com/steve-klabnik/
+-- https://cppcast.com/nu-programming-languages-jonathan-turner/
+
+-- https://castalio.info/episodes/episode-119-carol-nichols-rust-language/
+
+-- https://corecursive.com/024-software-as-a-reflection-of-values-with-bryan-cantrill/
+-- https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/
+-- https://corecursive.com/016-moves-and-borrowing-in-rust-with-jim-blandy/
+-- https://corecursive.com/030-rethinking-databases-with-jon-gjengset/
+-- https://zadevchat.io/24/
+-- https://podcasts-francais.fr/podcast/les-cast-codeurs-podcast/lcc-239-interview-rust-avec-francois-teychene-sylv
+-- https://slash-podcast.fr/podcasts/meilisearch/
+
+-- https://anchor.fm/humans-of-open-source/episodes/Chris-Krycho-on-Life-Post-New-Rustacean-emh815

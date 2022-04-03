@@ -2,7 +2,7 @@ use actix_web::{web, App, HttpServer};
 use actix_web::dev::Server;
 use sqlx::PgPool;
 use std::net:: TcpListener;
-use crate::routes::{last_episodes, health_check, channels_last_episode};
+use crate::routes::{last_episodes, health_check, channels_last_episode, list_channels, channel};
 
 pub fn run(
         listener:TcpListener,
@@ -14,6 +14,8 @@ pub fn run(
         .route("/health_check", web::get().to(health_check))
         .route("/channels_last_episode", web::get().to(channels_last_episode))
         .route("/last_episodes", web::get().to(last_episodes))
+        .route("/list_channels", web::get().to(list_channels))
+        .route("/channel/{channel_id}", web::get().to(channel))
         .app_data(db_pool.clone())
     })
     .listen(listener)?

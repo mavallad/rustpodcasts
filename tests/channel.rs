@@ -6,29 +6,11 @@ use rustpodcasts::configuration::get_configuration;
 use reqwest::header::HeaderValue;
 use common::spawn_app;
 
-#[tokio:: test]
-async fn health_check_works() {
-    let app = spawn_app().await;
-    
-    let client = reqwest::Client::new();
-    
-    let response = client
-        .get(&format!("{}/health_check", &app.address))
-        .send()
-        .await
-        .expect("Failed to execute request.");
-
-    assert!(response.status().is_success());
-    assert_eq!(Some(0), response.content_length());
-}
-
-
 #[tokio::test]
-async fn channels_last_episode_returns_200_with_list_of_channels() {
+async fn channel_returns_200_with_data_of_channel_and_list_episodes() {
     let app = spawn_app().await;
     let configuration = get_configuration("tests/config/configuration.yaml").expect("Failed to read configuration");
     let connection_string = configuration.database.connection_string();
-    println!("CONNECTION: {}", configuration.database.connection_string());
     let mut connection = PgConnection::connect(&connection_string)
         .await
         .expect("Failed to connect to Postgres.");
@@ -72,7 +54,7 @@ async fn channels_last_episode_returns_200_with_list_of_channels() {
     let client = reqwest::Client::new();
     
     let response = client
-        .get(&format!("{}/channels_last_episode", &app.address))
+        .get(&format!("{}/channel/1", &app.address))
         .send()
         .await
         .expect("Failed to execute request.");
@@ -84,6 +66,8 @@ async fn channels_last_episode_returns_200_with_list_of_channels() {
         Some(&HeaderValue::from_static("application/json")),
         response_headers.get(reqwest::header::CONTENT_TYPE)
     );
-    let expected_body = r#"[{"channel_id":1,"name":"::name::","lang":"en","icon_path":"::icon_path::","last_episode_id":1,"last_episode_title":"::title::","last_episode_date_published":"2022-10-20","total_episodes":1}]"#;
+    let expected_body = concat!(
+        r#"{"id":1,"name":"::name::","description":"::description::","host":"::host::","url":"::url::","lang":"en","icon_path":"::icon_path::","active":true,"#,
+        r#""episodes":[{"id":1,"title":"::title::","description":"::description::","lang":"en","url":"::url::","date_published":"2022-10-20","duration_seconds":400,"icon_path":"::icon_path::"}]}"#);
     assert_eq!(expected_body, response.text().await.expect("Failed to read text of response"));
 }
