@@ -6,6 +6,7 @@ use crate::repositories::channel_from_db;
 
 pub async fn channel(path_channel_id: web::Path<i64>, pool: web::Data<PgPool>) -> web::Json<Option<ChannelWithEpisodes>> {
     let channel_id = *path_channel_id;
+    log::info!("Asking for the channel {}", channel_id);
     web::Json(channel_from_db(channel_id, pool.get_ref()).await)
 }
 

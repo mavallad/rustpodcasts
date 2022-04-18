@@ -5,6 +5,7 @@ use sqlx::PgPool;
 
 #[tokio:: main]
 async fn main() -> std::io::Result<()> {
+    log4rs::init_file("config/log.yaml", Default::default()).unwrap();
     let configuration = get_configuration("config/configuration").expect("Failed to read configuration");
     // Renamed!
     let connection_pool = PgPool::connect(&configuration.database.connection_string())

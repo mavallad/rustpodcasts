@@ -20,7 +20,7 @@ pub async fn channel_from_db(channel_id: i64, pool: &PgPool) -> Option<ChannelWi
     match records {
         Ok(rows) => transform_channel(rows),
         Err(error) => {
-            eprintln!("ERROR IN QUERY: {}", error);
+            log::error!("Error in the query for channel {}: {}", channel_id, error);
             Option::None
         }
     }

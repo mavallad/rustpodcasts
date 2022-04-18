@@ -3,6 +3,7 @@ use serde::Serialize;
 use sqlx::PgPool;
 
 pub async fn list_channels(pool: web::Data<PgPool>) -> web::Json<Vec<ChannelSummary>> {
+    log::info!("Asking for the list of channels");
     let records = sqlx::query_as!(
             ChannelSummary,
             "select channels.id, channels.name, channels.description, channels.url, \
@@ -15,7 +16,7 @@ pub async fn list_channels(pool: web::Data<PgPool>) -> web::Json<Vec<ChannelSumm
     web::Json(match records {
         Ok(channels) => channels,
         Err(error) => {
-            eprintln!("ERROR IN QUERY: {}", error);
+            log::error!("Error in the query for channels: {}", error);
             vec![]
         }
     })
