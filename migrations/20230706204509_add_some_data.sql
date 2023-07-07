@@ -100,20 +100,3 @@ We discuss topics such as what features have come and gone in the language, how 
 '2020-11-07', 46*60+10, 'https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo400/10693218/57d56c07c6002d65.jpeg');
 
 
-
-
-
--- https://cppcast.com/steve-klabnik/
--- https://cppcast.com/nu-programming-languages-jonathan-turner/
-
--- https://castalio.info/episodes/episode-119-carol-nichols-rust-language/
-
--- https://corecursive.com/024-software-as-a-reflection-of-values-with-bryan-cantrill/
--- https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/
--- https://corecursive.com/016-moves-and-borrowing-in-rust-with-jim-blandy/
--- https://corecursive.com/030-rethinking-databases-with-jon-gjengset/
--- https://zadevchat.io/24/
--- https://podcasts-francais.fr/podcast/les-cast-codeurs-podcast/lcc-239-interview-rust-avec-francois-teychene-sylv
--- https://slash-podcast.fr/podcasts/meilisearch/
-
--- https://anchor.fm/humans-of-open-source/episodes/Chris-Krycho-on-Life-Post-New-Rustacean-emh815

@@ -1,4 +1,4 @@
-create table channels (
+create table if not exists channels (
 	id bigint generated always as identity primary key,
 	name text not null unique,
 	host text,
@@ -8,3 +8,4 @@ create table channels (
 	icon_path text not null,
 	active boolean not null default true
 );
+

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .header {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      font-family: "Arial", sans-serif;
+    }
+
+    .description {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-family: "Arial", sans-serif;
+    }
+
+    .menu {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .menu a {
+      display: inline-block;
+      margin-right: 10px;
+      text-decoration: none;
+      font-family: "Arial", sans-serif;
+      font-size: 16px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .left-section,
+    .right-section {
+      width: 48%;
+      padding: 10px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .item {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 200px;
+      position: relative;
+      padding-left: 40px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .item img {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 class="title">Rust Podcasts</h1>
+  </div>
+  <div class="description">
+    <p>Explore the world of Rust programming language through these informative and entertaining podcasts.</p>
+  </div>
+  <div class="menu">
+    <a href="#channels">Channels</a>
+    <a href="#episodes">All Episodes</a>
+    <a href="#search">Search</a>
+    <a href="#about">About</a>
+  </div>
+  <div class="container">
+    <div class="left-section">
+      <h2 class="section-title">Latest Episodes</h2>
+      <div class="item">
+        <img src="path/to/icon1.png" alt="Icon 1">
+        Item 1
+      </div>
+      <div class="item">
+        <img src="path/to/icon2.png" alt="Icon 2">
+        Item 2
+      </div>
+      <!-- Add more items for the left section -->
+    </div>
+    <div class="right-section">
+      <h2 class="section-title">Main Channels</h2>
+      <div class="item">
+        <img src="path/to/icon5.png" alt="Icon 5">
+        Item 5
+      </div>
+      <div class="item">
+        <img src="path/to/icon6.png" alt="Icon 6">
+        Item 6
+      </div>
+      <!-- Add more items for the right section -->
+    </div>
+  </div>
+</body>
+</html>
