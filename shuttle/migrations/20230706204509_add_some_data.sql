@@ -1,39 +1,45 @@
 insert into channels
-(name, host, description, url, lang, icon_path, active)
+(id, name, host, description, url, lang, icon_path, active)
 values
-('-', null,'-', '-', 'en', '-', true);
+(1, '-', null,'-', '-', 'en', null, true);
 
 insert into channels
-(name, host, description, url, lang, icon_path, active)
+(id, name, host, description, url, lang, icon_path, active)
 values
-('New Rustacean', 'Chris Krycho',
+(2, 'New Rustacean', 'Chris Krycho',
 'This is a podcast about learning the programming language Rust--from scratch!. Created by Chris Krycho. You can hear more about why I''m doing this in e000: Why Am I Here?',
-'https://newrustacean.com/', 'en', '-', false);
+'https://newrustacean.com/', 'en', 'https://newrustacean.com/podcast.png', false);
 
 
 insert into channels
-(name, host, description, url, lang, icon_path, active)
+(id, name, host, description, url, lang, icon_path, active)
 values
-('Building with Rust', 'Sean Chen', 'Chats with folks who work with and within the Rust programming language',
+(3, 'Building with Rust', 'Sean Chen', 'Chats with folks who work with and within the Rust programming language',
 'https://anchor.fm/building-with-rust', 'en',
 'https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/production/podcast_uploaded_nologo400/12174063/12174063-1611952651089-34ad25ae71f66.jpg',
 true);
 
 insert into channels
-(name, host, description, url, lang, icon_path, active)
+(id, name, host, description, url, lang, icon_path, active)
 values
-('The Request for Explanation Podcast', null, 'A weekly discussion of Rust RFCs. This is an unofficial podcast created by Rust community members. 20 minutes once a week discussing a Rust RFC',
+(4, 'The Request for Explanation Podcast', null, 'A weekly discussion of Rust RFCs. This is an unofficial podcast created by Rust community members. 20 minutes once a week discussing a Rust RFC',
 'https://request-for-explanation.github.io/podcast/', 'en',
-'-',
+null,
 false);
 
 insert into channels
-(name, host, description, url, lang, icon_path, active)
+(id, name, host, description, url, lang, icon_path, active)
 values
-('Chats with James', 'James Munns', 'Chats with James is a podcast discussing everything that James or his guests are passionate about. Embedded Systems, the Rust Programming Language, and a variety of other technical topics are the most commonly discussed items',
+(5, 'Chats with James', 'James Munns', 'Chats with James is a podcast discussing everything that James or his guests are passionate about. Embedded Systems, the Rust Programming Language, and a variety of other technical topics are the most commonly discussed items',
 'https://jamesmunns.com/podcast/', 'en',
-'-',
+null,
 true);
+
+insert into channels
+(id, name, host, description, url, lang, icon_path, active)
+values
+(6, 'The Rust Workshop Podcast', 'Tim Abell', 'All things Rust. Discoveries, Learnings, Interviews This show is brought to you by The Rust Workshop https://rustworkshop.co/ for all your Rust coding needs.',
+'https://feeds.transistor.fm/the-rust-workshop-podcast', 'en', 'https://images.transistor.fm/file/transistor/images/show/33931/full_1681173292-artwork.jpg', true);
 
 insert into episodes
 (channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
@@ -57,13 +63,13 @@ values
 'Bryan Cantrill', 'Bryan Cantrill is the CTO of Joyent and well known for the development of DTrace at Sun Microsystems. Today on the podcast, Bryan discusses with Wes Reisz a bit about the origins of DTrace and then spends the rest of the time discussing why he feels Rust is the "biggest development in systems development in his career." The podcast wraps with a bit about why Bryan feels we should be rewriting parts of the operating system in Rust',
 'en', 'https://www.infoq.com/podcasts/rust-systems-programming/', '2019-04-12', 38*60+41, null);
 
-insert into episodes
-(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
-values
-(1, 'KubeOps Tech Talk EP16: คุยเรื่อง Rust สไตล์ Cloud Native Rustacean', null,
-'KubeOps Tech Talk EP16 ครั้งนี้คุยกันเรื่อง Rust programming language ตามสไตล์ Cloud Native Rustacean พบกับคุณเนตรชวินทร์ สุทธิสันธิ์ ผู้พัฒนาที่ใช้ภาษา Rust',
-'th', 'https://podcasts.kubeops.guru/e/kubeops-tech-talk-ep16-%e0%b8%84%e0%b8%b8%e0%b8%a2%e0%b9%80%e0%b8%a3%e0%b8%b7%e0%b9%88%e0%b8%ad%e0%b8%87-rust-%e0%b8%aa/',
-'2021-05-21', 3600+29*60+37, 'https://pbcdn1.podbean.com/imglogo/image-logo/9845650/kubeops-logo.png');
+-- insert into episodes
+-- (channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+-- values
+-- (1, 'KubeOps Tech Talk EP16: คุยเรื่อง Rust สไตล์ Cloud Native Rustacean', null,
+-- 'KubeOps Tech Talk EP16 ครั้งนี้คุยกันเรื่อง Rust programming language ตามสไตล์ Cloud Native Rustacean พบกับคุณเนตรชวินทร์ สุทธิสันธิ์ ผู้พัฒนาที่ใช้ภาษา Rust',
+-- 'th', 'https://podcasts.kubeops.guru/e/kubeops-tech-talk-ep16-%e0%b8%84%e0%b8%b8%e0%b8%a2%e0%b9%80%e0%b8%a3%e0%b8%b7%e0%b9%88%e0%b8%ad%e0%b8%87-rust-%e0%b8%aa/',
+-- '2021-05-21', 3600+29*60+37, 'https://pbcdn1.podbean.com/imglogo/image-logo/9845650/kubeops-logo.png');
 
 
 insert into episodes
@@ -99,4 +105,36 @@ We discuss topics such as what features have come and gone in the language, how 
 'en', 'https://anchor.fm/humans-of-open-source/episodes/Niko-Matsakis-on-how-Rust-has-Matured-emh819',
 '2020-11-07', 46*60+10, 'https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo400/10693218/57d56c07c6002d65.jpeg');
 
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(1, 'Understanding Vulnerability Analysis in the Rust Programming Language', 'David Svoboda, Garret Wassermann',
+'David Svoboda and Garret Wassermann explore tools for understanding vulnerabilities in Rust whether the original source code is available or not.',
+'en', 'https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=980217', '2023-06-08', 30*60+44, 'https://deow9bq0xqvbj.cloudfront.net/dir-logo/428457/428457_300x300.png');
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(6, 'What even is this Rust thing -> Naïve Excitement', null,'Tim and Jim, two coders with 20 years each coding, one more c# one more c++ but both with broad experience have discovered Rust, and capture their learnings, musings and enthusiasms for your entertainment.',
+'en', 'https://share.transistor.fm/s/8350a4a2', '2022-09-08', 102*60+51, null);
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(6, 'Jim and Tim go deeper into Rust and compare with other languages', null,'An update on what we''ve learned from spending more time with Rust with real coding. The perspective from C#, C++, Ruby etc.',
+'en', 'https://share.transistor.fm/s/f22c961a', '2023-05-02', 161*60+26, null);
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(6, 'Rust meetups and DevOps pipelines with end-to-end testing for confident fast shipping', null, 'Quick update about what''s going on in the Rust Workshop, and new Rust meetup in Reading, UK',
+'en', 'https://share.transistor.fm/s/f4dbb201', '2023-06-28', 15*60+18, null);
+
+
+insert into episodes
+(channel_id, title, guest, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(1, 'Code Savvy Presents: The Rust Programming Language', 'Chris Eckhardt', 'This month''s episode features Chris Eckhardt of Rust MN, a local group dedicated to learning, sharing, and celebrating the Rust Programming Language.',
+'en', 'https://www.codesavvy.org/podcast/episode/e02da11c/code-savvy-presents-the-rust-programming-language', '2023-01-24', 19*60+26,
+'https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/20933747/20933747-1641863468645-5b8d9cfd1367e.jpg');
 

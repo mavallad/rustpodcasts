@@ -1,0 +1,30 @@
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Arial", sans-serif;
+}
+
+.description {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: "Arial", sans-serif;
+}
+
+.menu {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu a {
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+}

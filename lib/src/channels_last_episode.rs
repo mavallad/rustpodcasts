@@ -1,16 +1,7 @@
-use actix_web::{
-    get,
-    web::{self, Json},
-    Result, HttpResponse, Responder
-};
 use chrono::NaiveDate;
 use serde::Serialize;
-use shuttle_runtime::tracing::log;
-use crate::common::{AppState, QueryError};
+use crate::common::QueryError;
 use sqlx::{Executor, FromRow, PgPool};
-use tera::Context;
-
-type ResultQuery<T> = std::result::Result<T, QueryError>;
 
 const SQL: &str = r#"
                     with
@@ -22,31 +13,13 @@ const SQL: &str = r#"
                     from last_episodes
                     inner join count_episodes on last_episodes.channel_id = count_episodes.channel_id
                     inner join channels on count_episodes.channel_id = channels.id
+                    order by last_episodes.date_published desc
+                    limit 4
                     "#;
 
-#[get("/api/channels_last_episode")]
-pub async fn json(state: web::Data<AppState>) -> Result<Json<Vec<ChannelWithLastEpisode>>> {
-    match data(&state).await {
-        Ok(channels) => Ok(Json(channels)),
-        Err(query_error) => { log::error!("{}", query_error); Ok(Json(vec![])) }
-    }
-}
-
-#[get("/channels_last_episode")]
-pub async fn html(state: web::Data<AppState>) -> impl Responder {
-    let mut ctx = Context::new();
-    let data = match data(&state).await {
-        Ok(channels) => channels,
-        Err(query_error) => { log::error!("{}", query_error); vec![] }
-    };
-    ctx.insert("name", "pepe");
-    let rendered = state.tera.render("channels_last_episode.html", &ctx).unwrap();
-    HttpResponse::Ok().body(rendered)
-}
-
-async fn data(state: &web::Data<AppState>) -> ResultQuery<Vec<ChannelWithLastEpisode>> {
+async fn find(pool: &PgPool) -> ResultQuery<Vec<ChannelWithLastEpisode>> {
     sqlx::query_as(SQL)
-        .fetch_all(&state.pool)
+        .fetch_all(&pool)
         .await
         .map_err(|e| QueryError::new(SQL.to_owned(), e.to_string())
     )
