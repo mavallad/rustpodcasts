@@ -6,7 +6,7 @@ use super::{PodcastsRepository, ResultQuery, QueryError};
 
 const SQL_LAST_EPISODES: &str =
 r#"
-select e.id, e.channel_id, e.title, c.name as channel_name, e.guest,
+select e.id, e.channel_id, e.title, c.name as channel_name, e.guests,
 to_char((e.duration_seconds || ' seconds')::interval, 'hh24:mi:ss') as duration,
 e.lang, e.url, e.date_published, e.icon_path, c.icon_path as channel_icon_path,
 case 

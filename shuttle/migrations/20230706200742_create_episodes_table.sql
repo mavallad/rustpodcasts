@@ -2,7 +2,7 @@ create table if not exists episodes (
     id bigint generated always as identity primary key,
     channel_id bigint not null references channels(id),
     title text not null,
-    guest text,
+    guests text,
     description text not null,
     lang char(2) not null,
     url text not null,

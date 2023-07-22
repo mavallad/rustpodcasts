@@ -9,33 +9,40 @@
     <meta name="description" content="Collection of Rust language podcasts">
     <meta name="author" content="Manuel Valladares">
 
-    <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
     {% endblock head %}
 </head>
 <body>
-    <div id="header">
+    <header>
         {% block header %}
-        <h1 class="title">Rust Podcasts</h1>
+        <div id="header-content">
+            <div id="title-row">
+                <div><img src="images/ferrispodcast-small.png" alt="Ferris Logo" id="ferris-logo"/></div>
+                <h1>Rust Podcasts</h1>
+            </div>
+            <h2>
+                Explore the world of the Rust programming language through these informative and entertaining podcasts<br/>
+                Learn more about the Rust language at <a href="https://www.rust-lang.org/" id="link-rust">rust-lang.org</a>
+            </h2>
+            <nav id="navigation">
+                <a {% if page_id != "index" %} href="/index.html" {% endif %}>Main</a>
+                <a {% if page_id != "channels" %} href="/channels.html" {% endif %}>Channels</a>
+                <a {% if page_id != "episodes" %} href="/episodes.html" {% endif %}>Episodes</a>
+                {# <a href="#search">Search</a> #}
+                <a {% if page_id != "about" %} href="/about.html" {% endif %}>About</a>
+            </nav>
         </div>
-        <div class="description">
-            <p>Explore the world of Rust programming language through these informative and entertaining podcasts.</p>
-        </div>
-        <div class="menu">
-            <a {% if page_id != "index" %} href="/index.html" {% endif %}>Main</a>
-            <a {% if page_id != "channels" %} href="/channels.html" {% endif %}>All Channels</a>
-            <a {% if page_id != "episodes" %} href="/episodes.html" {% endif %}>All Episodes</a>
-            {# <a href="#search">Search</a> #}
-            <a {% if page_id != "about" %} href="/about.html" {% endif %}>About</a>
+        <div id="header-image">
         </div>
         {% endblock header %}
-    </div>
-    <div id="content">
+    </header>
+    <section id="content">
         {% block content %}
         {% endblock content %}
-    </div>
-    <div id="footer">
+    </section>
+    <footer>
         {% block footer %}
         {% endblock footer %}
-    </div>
+    </footer>
 </body>
 </html>
