@@ -1,6 +1,6 @@
 use async_trait::async_trait;
 
-use super::{ChannelWithLastEpisodeDb, PodcastsRepository, ResultQuery, QueryError, from_db::to_active_channel};
+use super::{PodcastsRepository, ResultQuery, QueryError, from_db::to_active_channel};
 use crate::model::{EpisodeLast, ChannelWithLastEpisode};
 use super::from_db::to_episode_last;
 
