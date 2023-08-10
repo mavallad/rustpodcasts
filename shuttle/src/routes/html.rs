@@ -5,7 +5,6 @@ use actix_web::{
     Responder
 };
 use shuttle_runtime::tracing::log;
-use lib::model::{EpisodeLast, ChannelWithLastEpisode};
 use crate::common::AppState;
 use lib::repository::PodcastsRepository;
 use tera::Context;
@@ -13,18 +12,29 @@ use tera::Context;
 #[get("/index.html")]
 pub async fn index(state: web::Data<AppState>) -> impl Responder {
     let repository: &dyn PodcastsRepository = &state.repository;
-    let last_episodes_data = match repository.get_last_episodes().await {
+    let lastest_episodes_data = match repository.get_last_episodes().await {
         Ok(episodes) => episodes,
         Err(query_error) => { log::error!("{}", query_error); vec![] }
     };
-    let active_channels_data = match repository.get_active_channels().await {
+    let active_channels_data = match repository.get_rust_active_channels().await {
         Ok(channels) => channels,
         Err(query_error) => { log::error!("{}", query_error); vec![] }
     };
     let mut ctx = Context::new();
+    println!("lastest_episodes_data: {:?}", active_channels_data);
     ctx.insert("page_id", "index");
-    ctx.insert("last_episodes", &last_episodes_data);
-    ctx.insert("active_channels", &active_channels_data);
-    let rendered = state.tera.render("index.html", &ctx).unwrap();
+    let template_html;
+    if !lastest_episodes_data.is_empty() {
+        let last_episode = &lastest_episodes_data[0];
+        let recent_episodes = &lastest_episodes_data[1..];
+        ctx.insert("last_episode", last_episode);
+        ctx.insert("recent_episodes", recent_episodes);
+        ctx.insert("active_channels", &active_channels_data);
+    
+        template_html = "index.html";
+    } else {
+        template_html = "error.html";
+    }
+    let rendered = state.tera.render(template_html, &ctx).unwrap();
     HttpResponse::Ok().body(rendered)
 }

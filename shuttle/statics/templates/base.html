@@ -25,11 +25,11 @@
                 Learn more about the Rust language at <a href="https://www.rust-lang.org/" id="link-rust">rust-lang.org</a>
             </h2>
             <nav id="navigation">
-                <a {% if page_id != "index" %} href="/index.html" {% endif %}>Main</a>
-                <a {% if page_id != "channels" %} href="/channels.html" {% endif %}>Channels</a>
-                <a {% if page_id != "episodes" %} href="/episodes.html" {% endif %}>Episodes</a>
+                <a {% if page_id != "index" %} href="/index.html" {% else %} class="navitem-selected" {% endif %} >Main</a>
+                <a {% if page_id != "channels" %} href="/channels.html" {% else %} class="navitem-selected" {% endif %}>Channels</a>
+                <a {% if page_id != "episodes" %} href="/episodes.html" {% else %} class="navitem-selected" {% endif %}>Episodes</a>
                 {# <a href="#search">Search</a> #}
-                <a {% if page_id != "about" %} href="/about.html" {% endif %}>About</a>
+                <a {% if page_id != "about" %} href="/about.html" {% else %} class="navitem-selected" {% endif %}>About</a>
             </nav>
         </div>
         <div id="header-image">

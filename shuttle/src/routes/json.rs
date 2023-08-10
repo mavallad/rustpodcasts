@@ -20,7 +20,7 @@ pub async fn last_episodes(state: web::Data<AppState>) -> Result<Json<Vec<Episod
 #[get("/active_channels")]
 pub async fn active_channels(state: web::Data<AppState>) -> Result<Json<Vec<ChannelWithLastEpisode>>> {
     let repository: &dyn PodcastsRepository = &state.repository;
-    match repository.get_active_channels().await {
+    match repository.get_rust_active_channels().await {
         Ok(channels) => Ok(Json(channels)),
         Err(query_error) => { log::error!("{}", query_error); Ok(Json(vec![])) }
     }

@@ -24,10 +24,9 @@ async fn actix_web(
     let tera_templates_path_pattern = format!("{}/templates/*.html", static_folder.to_string_lossy());
     let css_files_path = format!("{}/public/css/", static_folder.to_string_lossy());
     let image_files_path = format!("{}/public/images/", static_folder.to_string_lossy());
-    println!("CSS FILES PATH: {}", css_files_path);
     let tera = Tera::new(&tera_templates_path_pattern).unwrap();
 
-    let repository = PostgresPodcastsRepository::new(pool);
+    let repository: PostgresPodcastsRepository = PostgresPodcastsRepository::new(pool);
 
     let state = web::Data::new(AppState { repository, tera });
 

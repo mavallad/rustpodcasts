@@ -170,3 +170,9 @@ values
 'en', 'https://www.se-radio.net/2023/05/se-radio-562-bastian-gruber-on-rust-web-development/', '2023-05-03', 68*60+23,
 'https://www.se-radio.net/wp-content/uploads/2023/05/bastian-gruber-100.png');
 
+insert into episodes
+(channel_id, title, guests, description, lang, url, date_published, duration_seconds, icon_path)
+values
+(5, '012 - JT', 'JT',
+'In this episode, James chats with JT about the intricacies of writing programming languages, what makes designing programs fun, strategies for defining goals, and more.',
+'en', 'https://jamesmunns.com/podcast/012-jt/', '2023-06-29', 62*60+20, null);
