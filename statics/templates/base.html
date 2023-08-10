@@ -9,36 +9,40 @@
     <meta name="description" content="Collection of Rust language podcasts">
     <meta name="author" content="Manuel Valladares">
 
-    <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
     {% endblock head %}
 </head>
 <body>
-    <div id="header">
+    <header>
         {% block header %}
-        <h1 class="title">Rust Podcasts</h1>
-        </div>
-            <div class="description">
-                <p>Explore the world of Rust programming language through these informative and entertaining podcasts.</p>
+        <div id="header-content">
+            <div id="title-row">
+                <div><img src="images/ferrispodcast-small.png" alt="Ferris Logo" id="ferris-logo"/></div>
+                <h1>Rust Podcasts</h1>
             </div>
-        <div class="menu">
-            {{ page == "index" ? "active" : "" }}
-            <a href="/index.html">
-                Main
-            </a>
-            <a href="#channels">All Channels</a>
-            <a href="#episodes">All Episodes</a>
-            <a href="#search">Search</a>
-            <a href="#about">About</a>
+            <h2>
+                Explore the world of the Rust programming language through these informative and entertaining podcasts<br/>
+                Learn more about the Rust language at <a href="https://www.rust-lang.org/" id="link-rust">rust-lang.org</a>
+            </h2>
+            <nav id="navigation">
+                <a {% if page_id != "index" %} href="/index.html" {% else %} class="navitem-selected" {% endif %} >Main</a>
+                <a {% if page_id != "channels" %} href="/channels.html" {% else %} class="navitem-selected" {% endif %}>Channels</a>
+                <a {% if page_id != "episodes" %} href="/episodes.html" {% else %} class="navitem-selected" {% endif %}>Episodes</a>
+                {# <a href="#search">Search</a> #}
+                <a {% if page_id != "about" %} href="/about.html" {% else %} class="navitem-selected" {% endif %}>About</a>
+            </nav>
+        </div>
+        <div id="header-image">
         </div>
         {% endblock header %}
-    </div>
-    <div id="content">
+    </header>
+    <section id="content">
         {% block content %}
         {% endblock content %}
-    </div>
-    <div id="footer">
+    </section>
+    <footer>
         {% block footer %}
         {% endblock footer %}
-    </div>
+    </footer>
 </body>
 </html>

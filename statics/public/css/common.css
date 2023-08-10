@@ -1,30 +1,99 @@
-.header {
-    text-align: center;
-    padding: 20px 0;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", "Arial", sans-serif;
 }
 
-.title {
-    font-size: 36px;
+nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+nav a.navitem-selected {
     font-weight: bold;
-    font-family: "Arial", sans-serif;
 }
 
-.description {
+header {
+    margin: 0;
+    padding: 15px 15px;
+    background-image: url("/images/microphone_transparent.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #4E384E;
+    background-position: right 20px center;
+    display: flex;
+}
+
+div#title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    margin: 6px;
+}
+
+img#ferris-logo {
+    width: 100px;
+    height: 74px;
+    margin-right: 20px;
+}
+
+header div#header-content {
+    flex-grow: 1;
+}
+
+header div#header-image {
+    width: 300px;
+    height: 200px;
+}
+
+header h1 {
     text-align: center;
-    font-size: 18px;
-    margin-bottom: 20px;
-    font-family: "Arial", sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    color: #F3DBD4;
+    text-shadow: 0px 0px 6px black;
+    margin: 0;
+    padding: 0;
 }
 
-.menu {
+header h2 {
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 24px;
+    color: #F3DBD4;
 }
 
-.menu a {
+header a#link-rust {
+    color: #E43A25;
+    font-size: 28px;
+    text-decoration: none;
+    padding-left: 3px;
+}
+
+nav {
+    margin-top: 20px;
+}
+nav a {
     display: inline-block;
     margin-right: 10px;
     text-decoration: none;
-    font-family: "Arial", sans-serif;
-    font-size: 16px;
+    font-size: 22px;
+
+    color: #E43A25;
+    text-shadow: 0px 0px 6px black;
+}
+
+nav a:visitee {
+    color: #f9d923;
+}
+
+nav a:hover {
+    color: #E43A25;
+}
+
+section#content {
+    padding: 15px;
+    background-color: #F3DBD4;
 }

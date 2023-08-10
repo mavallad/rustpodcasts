@@ -1,51 +1,144 @@
-{% set page = "index" %}
-
 {% extends "base.html" %}
 
 {% block title %}Main page rustpodcasts{% endblock title %}
 {% block head %}
     {{ super() }}
     <style>
-        #content {
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
-        }
+      div#last-episode {
+        margin-bottom: 20px;
+      }
+
+      section#new-episodes-and-channels {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .left-section,
+      .right-section {
+        width: 49.6%;
+        padding: 0px;
+      }
     
-        .left-section,
-        .right-section {
-          width: 48%;
-          padding: 10px;
-        }
+      h2.section-title {
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 3px;
+        color: #4E384E;
+      }
     
-        .section-title {
-          font-size: 24px;
-          font-weight: bold;
-          margin-bottom: 10px;
-        }
-    
-        .item {
-          width: 100%;
-          height: 200px;
-          margin-bottom: 10px;
-          border: 1px solid #ccc;
-          text-align: center;
-          vertical-align: middle;
-          line-height: 200px;
-          position: relative;
-          padding-left: 40px;
-          border-radius: 5px;
-          overflow: hidden;
-        }
-    
-        .item img {
-          position: absolute;
-          top: 50%;
-          left: 10px;
-          transform: translateY(-50%);
-          width: 24px;
-          height: 24px;
-        }
+      .item-last-episode {
+        display:flex;
+        border: 1px solid #4E384E;
+        border-radius: 5px;
+        padding: 10px;
+      }
+
+      .item-last-episode h3 {
+        margin: 0px 0px 5px 0px;
+        color: #4E384E;
+      }
+
+      .item-last-episode p {
+        margin: 5px 0px 10px 0px;
+        font-style: italic;
+      }
+  
+      .item-last-episode .episode-image {
+        display: flex;
+        align-content: start;
+        margin-right: 10px;
+      }
+
+      .item-last-episode img {
+        width: 130px;
+        height: 130px;
+      }
+
+      .item-last-episode .episode-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+      }
+
+      .item-last-episode div.episode-data {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        align-items: end;
+      }
+
+      .item-new-episode,
+      .item-new-channel {
+        display:flex;
+        flex-direction: column;
+        border: 1px solid #4E384E;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .item-new-episode div.image-description-new-episode,
+      .item-new-channel div.image-description-new-channel {
+        display: flex;
+      }
+
+      .item-new-episode img,
+      .item-new-channel img {
+        width: 80px;
+        height: 80px;
+        margin: auto;
+        display: block;
+      }
+
+      .item-new-episode div.description-new-episode,
+      .item-new-channel div.description-new-channel {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        margin-left: 5px;
+      }
+
+      .item-new-episode div.description-new-episode h3,
+      .item-new-channel div.description-new-channel h3 {
+        margin: 0px;
+      }
+
+      .item-new-episode div.description-new-episode p,
+      .item-new-channel div.description-new-channel p {
+        margin: 5px 0px 5px 0px;
+        font-style: italic;
+      }
+
+      .item-new-episode div.episode-url,
+      .item-new-channel div.channel-url {
+        margin-bottom: 5px;
+      }
+
+      .item-new-episode div.episode-data-row,
+      .item-new-channel div.channel-data-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+
+      div.channel-last-episode {
+        margin-top: 20px;
+      }
+
+      img.image-lang {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+      }
+
+      img.icon-square {
+        vertical-align: sub;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+      }
     </style>
 {% endblock head %}
 
@@ -54,28 +147,120 @@
 {% endblock header %}
 
 {% block content %}
-<div class="left-section">
-    <h2 class="section-title">Latest Episodes</h2>
-    <div class="item">
-      <img src="path/to/icon1.png" alt="Icon 1">
-      Item 1
+    <div id="last-episode">
+        <h2 class="section-title">Latest Episode</h2>
+        <div class="item-last-episode">
+          {% if last_episode.icon_path %}
+              {% set icon_path = last_episode.icon_path %}
+          {% elif last_episode.channel_icon_path %}
+              {% set icon_path = last_episode.channel_icon_path %}
+          {% else %}
+              {% set icon_path = "images/default_icon.png" %}
+          {% endif %}
+          <div class="episode-image">
+              <img src="{{icon_path}}" alt="Icon {{last_episode.title}}">
+          </div>
+          <div class="episode-content">
+            <div class="episode-description">
+                <h3>{{last_episode.title}}</h3>
+                {% if last_episode.guest %}
+                <h4>Guests: {{last_episode.guest}}</h4>
+                {% endif %}
+                <p class="description-summary">{{last_episode.description_summary}}</p>
+            </div>
+            <div>
+              <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" /> <a href="{{last_episode.url}}">{{last_episode.url}}</a>
+            </div>
+            <div class="episode-data">
+              {% if last_episode.channel_name != "-" %}
+                <span><img alt="Podcast icon" src="images/podcasts.png" class="icon-square" /> {{last_episode.channel_name}}</span>
+              {% endif %}
+              <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{last_episode.date_published}}</span>
+              <span><img alt="Time icon" src="images/timer.png" class="icon-square" /> {{last_episode.duration}}</span>
+              <span><img alt="English" class="image-lang" src="https://unpkg.com/language-icons/icons/{{last_episode.lang}}.svg" /></span>
+            </div>
+          </div>
+      </div>
     </div>
-    <div class="item">
-      <img src="path/to/icon2.png" alt="Icon 2">
-      Item 2
-    </div>
-    <!-- Add more items for the left section -->
-  </div>
-  <div class="right-section">
-    <h2 class="section-title">Main Channels</h2>
-    <div class="item">
-      <img src="path/to/icon5.png" alt="Icon 5">
-      Item 5
-    </div>
-    <div class="item">
-      <img src="path/to/icon6.png" alt="Icon 6">
-      Item 6
-    </div>
-    <!-- Add more items for the right section -->
-  </div>
+    <section id="new-episodes-and-channels">
+        <div class="left-section">
+            <h2 class="section-title">Other Recent Episodes</h2>
+            {% for episode in recent_episodes %}
+            <div class="item-new-episode">
+                <div class="image-description-new-episode">
+                    {% if episode.icon_path %}
+                        {% set icon_path = episode.icon_path %}
+                    {% elif episode.channel_icon_path %}
+                        {% set icon_path = episode.channel_icon_path %}
+                    {% else %}
+                        {% set icon_path = "images/default_icon.png" %}
+                    {% endif %}
+                    <div class="episode-image">
+                        <img src="{{icon_path}}" alt="Icon {{episode.title}}">
+                    </div>
+                    <div class="description-new-episode">
+                        <h3>{{episode.title}}</h3>
+                        {% if episode.guest %}
+                        <h4>Guests: {{episode.guest}}</h4>
+                        {% endif %}
+                        <p>{{episode.description_summary}}</p>
+                    </div>
+                </div>
+                <div class="data-new-episode">
+                  <div class="episode-url">
+                    <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" /> <a href="{{episode.url}}">{{episode.url}}</a>
+                  </div>
+                  <div class="episode-data-row">
+                    {% if episode.channel_name != "-" %}
+                      <span><img alt="Podcast icon" src="images/podcasts.png" class="icon-square" /> {{episode.channel_name}}</span>
+                    {% endif %}
+                    <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{episode.date_published}}</span>
+                    <span><img alt="Time icon" src="images/timer.png" class="icon-square" /> {{episode.duration}}</span>
+                    <span><img alt="English" class="image-lang" src="https://unpkg.com/language-icons/icons/{{episode.lang}}.svg"></span>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="right-section">
+            <h2 class="section-title">Some Active Rust Channels</h2>
+            {% for channel in active_channels %}
+            <div class="item-new-channel">
+                <div class="image-description-new-channel">
+                    {% if channel.icon_path %}
+                        {% set icon_path = channel.icon_path %}
+                    {% else %}
+                        {% set icon_path = "images/default_icon.png" %}
+                    {% endif %}
+                    <div class="channel-image">
+                        <img src="{{icon_path}}" alt="Icon {{channel.name}}">
+                    </div>
+                    <div class="description-new-channel">
+                        <h3>{{channel.name}}</h3>
+                        <p>{{channel.description}}</p>
+                    </div>
+                </div>
+                <div class="data-new-channel">
+                  {% if channel.hosts %}
+                  <div class="channel-hosts">
+                    Host: {{channel.hosts}}
+                  </div>
+                  {% endif %}
+                  <div class="channel-url">
+                    <img alt="World icon" src="images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
+                  </div>
+                  <div class="channel-last-episode">
+                      Last publication: <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" />
+                      <a href="{{channel.last_episode_url}}" >{{channel.last_episode_title}}</a>
+                  </div>
+                  <div class="channel-data-row">
+                    <span><img alt="Number icon" src="images/numbers.png" class="icon-square" /> {{channel.total_episodes}} episodes</span>
+                    <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
+                    <span><img alt="English" class="image-lang" src="https://unpkg.com/language-icons/icons/{{channel.lang}}.svg"></span>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock content %}
