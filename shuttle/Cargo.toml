@@ -11,12 +11,12 @@ lib = { workspace = true }
 actix-web = { workspace = true }
 actix-files = { workspace = true }
 
-shuttle-actix-web = "0.21.0"
-shuttle-runtime = "0.21.0"
-tokio = "1.26.0"
-shuttle-shared-db = { version = "0.21", features = ["postgres", "sqlx"] }
-shuttle-static-folder = "0.21"
+shuttle-actix-web = "0.23"
+shuttle-runtime = "0.23"
+tokio = "1.30.0"
+shuttle-shared-db = { version = "0.23", features = ["postgres", "sqlx"] }
+shuttle-static-folder = "0.23"
 chrono = { version = "0.4", features = ["serde"] }
 tera = "1"
 
-sqlx = { version = "0.6.3", default-features = false, features = [ "runtime-actix-native-tls", "macros", "postgres", "chrono", "migrate" ] }
+sqlx = { version = "0.7.1", default-features = false, features = [ "runtime-tokio", "tls-native-tls", "macros", "postgres", "chrono", "migrate" ] }

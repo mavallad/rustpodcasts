@@ -41,7 +41,7 @@ pub struct PostgresPodcastsRepository {
 }
 
 impl PostgresPodcastsRepository {
-    pub fn new(pool: sqlx::PgPool) -> Self {
+    pub fn new(pool: sqlx::postgres::PgPool) -> Self {
         Self { pool }
     }
 }

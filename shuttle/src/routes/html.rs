@@ -9,7 +9,7 @@ use crate::common::AppState;
 use lib::repository::PodcastsRepository;
 use tera::Context;
 
-#[get("/index.html")]
+#[get("/")]
 pub async fn index(state: web::Data<AppState>) -> impl Responder {
     let repository: &dyn PodcastsRepository = &state.repository;
     let lastest_episodes_data = match repository.get_last_episodes().await {

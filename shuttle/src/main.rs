@@ -1,7 +1,7 @@
 use actix_web::{get, web::{self, ServiceConfig}, middleware::Logger};
 use shuttle_actix_web::ShuttleActixWeb;
 use std::path::PathBuf;
-use sqlx::PgPool;
+use sqlx::postgres::PgPool;
 use lib::repository::postgres::PostgresPodcastsRepository;
 use common::AppState;
 use tera::Tera;
