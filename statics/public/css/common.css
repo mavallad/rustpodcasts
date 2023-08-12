@@ -97,3 +97,20 @@ nav a:hover {
 section#content {
     padding: 15px;
 }
+
+footer {
+    padding: 0px 15px;
+}
+
+footer h4 {
+    margin: 0px;
+}
+
+footer hr {
+    margin-top: 0px;
+    color: #000;
+}
+
+footer p {
+    margin: 5px 0px;
+}
