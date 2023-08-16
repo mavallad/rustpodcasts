@@ -49,7 +49,9 @@ pub struct ChannelWithLastEpisodeDb {
     last_episode_title: String,
     last_episode_url: String,
     last_episode_date_published: NaiveDate,
-    total_episodes: Option<i64>
+    total_episodes: Option<i64>,
+    active: bool,
+    rust_centered: bool
 }
 
 #[derive(Debug, Clone)]
@@ -77,6 +79,7 @@ pub type ResultQuery<T> = std::result::Result<T, QueryError>;
 pub trait PodcastsRepository: Send + Sync + 'static {
     async fn get_last_episodes(&self) -> ResultQuery<Vec<EpisodeLast>>;
     async fn  get_rust_active_channels(&self) -> ResultQuery<Vec<ChannelWithLastEpisode>>;
+    async fn get_all_channels(&self) -> ResultQuery<Vec<ChannelWithLastEpisode>>;
     // async fn get_film(&self, id: &Uuid) -> FilmResult<Film>;
     // async fn create_film(&self, id: &CreateFilm) -> FilmResult<Film>;
     // async fn update_film(&self, id: &Film) -> FilmResult<Film>;

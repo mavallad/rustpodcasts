@@ -45,5 +45,7 @@ pub struct ChannelWithLastEpisode {
     pub last_episode_title: String,
     pub last_episode_url: String,
     pub last_episode_date_published: NaiveDate,
-    pub total_episodes: Option<i64>
+    pub total_episodes: Option<i64>,
+    pub active: bool,
+    pub rust_centered: bool
 }

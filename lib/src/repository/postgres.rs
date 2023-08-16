@@ -1,6 +1,6 @@
 use async_trait::async_trait;
 
-use super::{PodcastsRepository, ResultQuery, QueryError, from_db::to_active_channel};
+use super::{PodcastsRepository, ResultQuery, QueryError, from_db::to_channel_with_last_episode};
 use crate::model::{EpisodeLast, ChannelWithLastEpisode};
 use super::from_db::to_episode_last;
 
@@ -21,11 +21,14 @@ limit 5
 const SQL_ACTIVE_CHANNELS: &str =
 r#"
 with
-last_episodes as (select distinct on (channel_id) id as episode_id, channel_id, title, url, date_published from episodes order by channel_id, date_published),
+last_episodes as (select distinct on (channel_id) id as episode_id, channel_id, title, url, date_published
+  from episodes order by channel_id, date_published),
 count_episodes as (select channel_id, count(*) as total_episodes from episodes group by channel_id)
-select channels.id as channel_id, channels.name, channels.description, channels.url, channels.lang, channels.icon_path, channels.hosts,
-last_episodes.episode_id as last_episode_id, last_episodes.title as last_episode_title, last_episodes.url as last_episode_url,
-last_episodes.date_published as last_episode_date_published, count_episodes.total_episodes
+select channels.id as channel_id, channels.name, channels.description, channels.url, channels.lang,
+  channels.icon_path, channels.hosts, channels.active, channels.rust_centered,
+  last_episodes.episode_id as last_episode_id, last_episodes.title as last_episode_title,
+  last_episodes.url as last_episode_url, last_episodes.date_published as last_episode_date_published,
+  count_episodes.total_episodes
 from last_episodes
 inner join count_episodes on last_episodes.channel_id = count_episodes.channel_id
 inner join channels on count_episodes.channel_id = channels.id
@@ -33,6 +36,24 @@ where channels.rust_centered = true
 and channels.active = true
 order by last_episodes.date_published desc
 limit 3
+"#;
+
+const SQL_ALL_CHANNELS: &str =
+r#"
+with
+last_episodes as (select distinct on (channel_id) id as episode_id, channel_id, title, url, date_published
+  from episodes order by channel_id, date_published),
+count_episodes as (select channel_id, count(*) as total_episodes from episodes group by channel_id)
+select channels.id as channel_id, channels.name, channels.description, channels.url, channels.lang,
+  channels.icon_path, channels.hosts, channels.active, channels.rust_centered,
+  last_episodes.episode_id as last_episode_id, last_episodes.title as last_episode_title,
+  last_episodes.url as last_episode_url, last_episodes.date_published as last_episode_date_published,
+  count_episodes.total_episodes
+from last_episodes
+inner join count_episodes on last_episodes.channel_id = count_episodes.channel_id
+inner join channels on count_episodes.channel_id = channels.id
+where channels.id != 1
+order by last_episodes.date_published desc
 "#;
 
 #[derive(Clone)]
@@ -71,7 +92,22 @@ impl PodcastsRepository for PostgresPodcastsRepository {
         );
         match res_query {
             Ok(channels_db) => {
-                let channels = channels_db.into_iter().map(|c| to_active_channel(c)).collect();
+                let channels = channels_db.into_iter().map(|c| to_channel_with_last_episode(c)).collect();
+                Ok(channels)
+            },
+            Err(e) => Err(e)
+        }
+    }
+
+    async fn get_all_channels(&self) -> ResultQuery<Vec<ChannelWithLastEpisode>> {
+        let res_query = sqlx::query_as(SQL_ALL_CHANNELS)
+            .fetch_all(&self.pool)
+            .await
+            .map_err(|e| QueryError::new(SQL_ALL_CHANNELS.to_owned(), e.to_string())
+        );
+        match res_query {
+            Ok(channels_db) => {
+                let channels = channels_db.into_iter().map(|c| to_channel_with_last_episode(c)).collect();
                 Ok(channels)
             },
             Err(e) => Err(e)

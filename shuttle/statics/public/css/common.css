@@ -114,3 +114,154 @@ footer hr {
 footer p {
     margin: 5px 0px;
 }
+
+
+/* Main page */
+div#last-episode {
+    margin-bottom: 20px;
+}
+
+section#new-episodes-and-channels {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.left-section,
+.right-section {
+    width: 49.6%;
+    padding: 0px;
+}
+
+h2.section-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #4E384E;
+}
+
+.item-last-episode {
+    display:flex;
+    border: 1px solid #4E384E;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.item-last-episode h3 {
+    margin: 0px 0px 5px 0px;
+    color: #4E384E;
+}
+
+.item-last-episode p {
+    margin: 5px 0px 10px 0px;
+    font-style: italic;
+}
+
+.item-last-episode .episode-image {
+    display: flex;
+    align-content: start;
+    margin-right: 10px;
+}
+
+.item-last-episode img {
+    width: 130px;
+    height: 130px;
+}
+
+.item-last-episode .episode-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.item-last-episode div.episode-data {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    align-items: end;
+}
+
+.item-new-episode,
+.item-new-channel {
+    display:flex;
+    flex-direction: column;
+    border: 1px solid #4E384E;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.item-new-episode div.image-description-new-episode,
+.item-new-channel div.image-description-new-channel {
+    display: flex;
+}
+
+.item-new-episode img,
+.item-new-channel img {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    display: block;
+}
+
+.item-new-episode div.description-new-episode,
+.item-new-channel div.description-new-channel {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-left: 5px;
+}
+
+.item-new-episode div.description-new-episode h3,
+.item-new-channel div.description-new-channel h3 {
+    margin: 0px;
+}
+
+.item-new-episode div.description-new-episode p,
+.item-new-channel div.description-new-channel p {
+    margin: 5px 0px 5px 0px;
+    font-style: italic;
+}
+
+.item-new-episode div.episode-url,
+.item-new-channel div.channel-url {
+    margin-bottom: 5px;
+}
+
+.item-new-episode div.episode-data-row,
+.item-new-channel div.channel-data-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+div.channel-last-episode {
+    margin-top: 20px;
+}
+
+img.image-lang {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+img.icon-square {
+    vertical-align: sub;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.inactive {
+    width: 80px;
+    float:left;
+    margin-left: -22px;
+    color: red;
+    transform:rotate(-15deg);
+    -ms-transform:rotate(-15deg); /* IE 9 */
+    -webkit-transform:rotate(-15deg); /* Opera, Chrome, and Safari */
+    border: 1px solid red;
+    padding-left: 5px;
+    box-shadow: 0 1px 0 0 red;
+}

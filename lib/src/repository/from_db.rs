@@ -1,7 +1,7 @@
 use crate::repository::{EpisodeLastDb, ChannelWithLastEpisodeDb};
 use crate::model::{EpisodeLast, ChannelWithLastEpisode};
 
-pub fn to_episode_last(eldb: EpisodeLastDb) -> EpisodeLast {
+pub fn to_episode_last(eldb: EpisodeLastDb) -> EpisodeLast {    
     EpisodeLast {
         id: eldb.id,
         channel_id: eldb.channel_id,
@@ -19,7 +19,7 @@ pub fn to_episode_last(eldb: EpisodeLastDb) -> EpisodeLast {
     }
 }
 
-pub fn to_active_channel(chdb: ChannelWithLastEpisodeDb) -> ChannelWithLastEpisode {
+pub fn to_channel_with_last_episode(chdb: ChannelWithLastEpisodeDb) -> ChannelWithLastEpisode {
     ChannelWithLastEpisode {
         channel_id: chdb.channel_id,
         name: chdb.name,
@@ -32,7 +32,9 @@ pub fn to_active_channel(chdb: ChannelWithLastEpisodeDb) -> ChannelWithLastEpiso
         last_episode_title: chdb.last_episode_title,
         last_episode_url: chdb.last_episode_url,
         last_episode_date_published: chdb.last_episode_date_published,
-        total_episodes: chdb.total_episodes
+        total_episodes: chdb.total_episodes,
+        active: chdb.active,
+        rust_centered: chdb.rust_centered
     }
 }
 

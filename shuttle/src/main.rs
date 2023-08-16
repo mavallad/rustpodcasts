@@ -1,4 +1,4 @@
-use actix_web::{get, web::{self, ServiceConfig}, middleware::Logger};
+use actix_web::{web::{self, ServiceConfig}, middleware::Logger};
 use shuttle_actix_web::ShuttleActixWeb;
 use std::path::PathBuf;
 use sqlx::postgres::PgPool;
@@ -8,11 +8,6 @@ use tera::Tera;
 
 mod common;
 mod routes;
-
-#[get("/")]
-async fn hello_world() -> &'static str {
-    "Hello World!"
-}
 
 #[shuttle_runtime::main]
 async fn actix_web(
@@ -44,6 +39,7 @@ async fn actix_web(
             .app_data(state.clone())
             .wrap(Logger::default())
             .service(routes::html::index)
+            .service(routes::html::channels)
         );
     };
 
