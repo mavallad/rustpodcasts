@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}About rustpodcasts{% endblock title %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+
+{% block header %}
+    {{ super() }}
+{% endblock header %}
+
+{% block content %}
+    <section id="about-welcome" class="about-section">
+        <h2>About</h2>
+        <p>Welcome to rustpodcasts, your ultimate resource for Rust programming language podcasts.</p>
+        <p>
+        Our mission is to provide a curated collection of insightful podcasts that delve into the world of Rust, catering to beginners and experienced developers alike.<br/>
+        Immerse yourself in the Rust community, stay updated on the latest trends, and level up your programming skills.
+        </p>
+    </section>
+    <section id="about-help" class="about-section">
+        <h2>Help us grow</h2>
+        <p>
+        If you have a favorite podcast to recommend, let us know at rustpodcasts@gmail.com<br/>
+        Spread the word by sharing our website with fellow Rustaceans.
+        </p>
+    </section>
+    <section id="about-contact" class="about-section">
+        <h2>Contact us</h2>
+        <ul>
+            <li><img src="images/sites/email-64.png" alt="email logo" class="contact-logo" /> email: rustpodcasts@gmail.com</li>
+            <li><img src="images/sites/x-logo-small.png" alt="twitter logo" class="contact-logo" /> X, Twitter: @rustpodcasts</li>
+        </ul>
+    </section>
+{% endblock content %}

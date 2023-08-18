@@ -255,8 +255,7 @@ img.icon-square {
 
 .inactive {
     width: 80px;
-    float:left;
-    margin-left: -22px;
+    float:right;
     color: red;
     transform:rotate(-15deg);
     -ms-transform:rotate(-15deg); /* IE 9 */

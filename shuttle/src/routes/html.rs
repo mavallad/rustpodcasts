@@ -64,3 +64,11 @@ pub async fn channels(state: web::Data<AppState>) -> impl Responder {
     let rendered = state.tera.render(template_html, &ctx).unwrap();
     HttpResponse::Ok().body(rendered)
 }
+
+#[get("/about.html")]
+pub async fn about(state: web::Data<AppState>) -> impl Responder {
+    let mut ctx = Context::new();
+    ctx.insert("page_id", "about");
+    let rendered = state.tera.render("about.html", &ctx).unwrap();
+    HttpResponse::Ok().body(rendered)
+}

@@ -13,37 +13,37 @@
     <div id="last-episode">
         <h2 class="section-title">Latest Episode</h2>
         <div class="item-last-episode">
-          {% if last_episode.icon_path %}
-              {% set icon_path = last_episode.icon_path %}
-          {% elif last_episode.channel_icon_path %}
-              {% set icon_path = last_episode.channel_icon_path %}
-          {% else %}
-              {% set icon_path = "images/default_icon.png" %}
-          {% endif %}
-          <div class="episode-image">
-              <img src="{{icon_path}}" alt="Icon {{last_episode.title}}">
-          </div>
-          <div class="episode-content">
-            <div class="episode-description">
-                <h3>{{last_episode.title}}</h3>
-                {% if last_episode.guest %}
-                <h4>Guests: {{last_episode.guest}}</h4>
-                {% endif %}
-                <p class="description-summary">{{last_episode.description_summary}}</p>
+            {% if last_episode.icon_path %}
+                {% set icon_path = last_episode.icon_path %}
+            {% elif last_episode.channel_icon_path %}
+                {% set icon_path = last_episode.channel_icon_path %}
+            {% else %}
+                {% set icon_path = "images/default_icon.png" %}
+            {% endif %}
+            <div class="episode-image">
+                <img src="{{icon_path}}" alt="Icon {{last_episode.title}}">
             </div>
-            <div>
-              <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" /> <a href="{{last_episode.url}}">{{last_episode.url}}</a>
+            <div class="episode-content">
+                <div class="episode-description">
+                    <h3>{{last_episode.title}}</h3>
+                    {% if last_episode.guest %}
+                        <h4>Guests: {{last_episode.guest}}</h4>
+                    {% endif %}
+                    <p class="description-summary">{{last_episode.description_summary}}</p>
+                </div>
+                <div>
+                    <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" /> <a href="{{last_episode.url}}">{{last_episode.url}}</a>
+                </div>
+                <div class="episode-data">
+                    {% if last_episode.channel_name != "-" %}
+                        <span><img alt="Podcast icon" src="images/podcasts.png" class="icon-square" /> {{last_episode.channel_name}}</span>
+                    {% endif %}
+                    <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{last_episode.date_published}}</span>
+                    <span><img alt="Time icon" src="images/timer.png" class="icon-square" /> {{last_episode.duration}}</span>
+                    <span><img alt="Language icon" class="image-lang" src="images/languages/{{last_episode.lang}}.svg" /></span>
+                </div>
             </div>
-            <div class="episode-data">
-              {% if last_episode.channel_name != "-" %}
-                <span><img alt="Podcast icon" src="images/podcasts.png" class="icon-square" /> {{last_episode.channel_name}}</span>
-              {% endif %}
-              <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{last_episode.date_published}}</span>
-              <span><img alt="Time icon" src="images/timer.png" class="icon-square" /> {{last_episode.duration}}</span>
-              <span><img alt="Language icon" class="image-lang" src="images/languages/{{last_episode.lang}}.svg" /></span>
-            </div>
-          </div>
-      </div>
+        </div>
     </div>
     <section id="new-episodes-and-channels">
         <div class="left-section">
@@ -70,17 +70,17 @@
                     </div>
                 </div>
                 <div class="data-new-episode">
-                  <div class="episode-url">
-                    <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" /> <a href="{{episode.url}}">{{episode.url}}</a>
-                  </div>
-                  <div class="episode-data-row">
-                    {% if episode.channel_name != "-" %}
-                      <span><img alt="Podcast icon" src="images/podcasts.png" class="icon-square" /> {{episode.channel_name}}</span>
-                    {% endif %}
-                    <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{episode.date_published}}</span>
-                    <span><img alt="Time icon" src="images/timer.png" class="icon-square" /> {{episode.duration}}</span>
-                    <span><img alt="Language icon" class="image-lang" src="images/languages/{{episode.lang}}.svg"></span>
-                  </div>
+                      <div class="episode-url">
+                          <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" /> <a href="{{episode.url}}">{{episode.url}}</a>
+                      </div>
+                      <div class="episode-data-row">
+                          {% if episode.channel_name != "-" %}
+                              <span><img alt="Podcast icon" src="images/podcasts.png" class="icon-square" /> {{episode.channel_name}}</span>
+                          {% endif %}
+                          <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{episode.date_published}}</span>
+                          <span><img alt="Time icon" src="images/timer.png" class="icon-square" /> {{episode.duration}}</span>
+                          <span><img alt="Language icon" class="image-lang" src="images/languages/{{episode.lang}}.svg"></span>
+                      </div>
                 </div>
             </div>
             {% endfor %}
@@ -104,23 +104,27 @@
                     </div>
                 </div>
                 <div class="data-new-channel">
-                  {% if channel.hosts %}
-                  <div class="channel-hosts">
-                    Host: {{channel.hosts}}
-                  </div>
-                  {% endif %}
-                  <div class="channel-url">
-                    <img alt="World icon" src="images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
-                  </div>
-                  <div class="channel-last-episode">
-                      Last publication: <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" />
-                      <a href="{{channel.last_episode_url}}" >{{channel.last_episode_title}}</a>
-                  </div>
-                  <div class="channel-data-row">
-                    <span><img alt="Number icon" src="images/numbers.png" class="icon-square" /> {{channel.total_episodes}} episodes</span>
-                    <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
-                    <span><img alt="Language icon" class="image-lang" src="images/languages/{{channel.lang}}.svg"></span>
-                  </div>
+                    {% if channel.hosts %}
+                    <div class="channel-hosts">
+                        Host: {{channel.hosts}}
+                    </div>
+                    {% endif %}
+                    <div class="channel-url">
+                        <img alt="World icon" src="images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
+                    </div>
+                    <div class="channel-last-episode">
+                        Last publication: <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" />
+                        <a href="{{channel.last_episode_url}}" >{{channel.last_episode_title}}</a>
+                    </div>
+                    <div class="channel-data-row">
+                        <span>
+                            <img alt="Number icon" src="images/numbers.png" class="icon-square" />
+                            {{channel.total_episodes}}
+                            {% if channel.total_episodes > 1 %}episodes{% else %}episode{% endif %}
+                        </span>
+                        <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
+                        <span><img alt="Language icon" class="image-lang" src="images/languages/{{channel.lang}}.svg"></span>
+                    </div>
                 </div>
             </div>
             {% endfor %}
