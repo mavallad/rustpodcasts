@@ -229,6 +229,11 @@ h2.section-title {
     margin-bottom: 5px;
 }
 
+.item-new-episode .data-new-episode,
+.item-new-channel .data-new-channel {
+    margin-top: 6px;
+}
+
 .item-new-episode div.episode-data-row,
 .item-new-channel div.channel-data-row {
     display: flex;
@@ -254,13 +259,32 @@ img.icon-square {
 }
 
 .inactive {
+    font-weight: bold;
     width: 80px;
-    float:right;
+    float: right;
+    margin-right: 30px;
     color: red;
-    transform:rotate(-15deg);
-    -ms-transform:rotate(-15deg); /* IE 9 */
-    -webkit-transform:rotate(-15deg); /* Opera, Chrome, and Safari */
-    border: 1px solid red;
+    transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg); /* IE 9 */
+    -webkit-transform: rotate(-15deg); /* Opera, Chrome, and Safari */
+    border: 2px solid red;
     padding-left: 5px;
     box-shadow: 0 1px 0 0 red;
+}
+
+section.about-section h2 {
+    margin: 0px;
+}
+
+section.about-section p {
+    margin: 8px 0px;
+}
+
+section.about-section ul {
+    list-style-type: none;
+}
+
+section.about-section img.contact-logo {
+    height: 20px;
+    width: 20px;
 }
