@@ -30,7 +30,7 @@ values
 'James chats with Dion Doktor about device drivers, bootloaders, and embedded Rust.',
 'en', 'https://jamesmunns.com/podcast/010-dion/', '2021-03-02', 35*60+50, null);
 
-insert into episodehttps://jamesmunns.com/podcast/008-yosh/
+insert into episodes
 (channel_id, title, guests, description, lang, url, date_published, duration_seconds, icon_path)
 values
 (5, '009 - Sylvan Morris', 'Sylvan Morris',
