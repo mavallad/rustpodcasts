@@ -22,7 +22,7 @@ const SQL_ACTIVE_CHANNELS: &str =
 r#"
 with
 last_episodes as (select distinct on (channel_id) id as episode_id, channel_id, title, url, date_published
-  from episodes order by channel_id, date_published),
+  from episodes order by channel_id, date_published desc),
 count_episodes as (select channel_id, count(*) as total_episodes from episodes group by channel_id)
 select channels.id as channel_id, channels.name, channels.description, channels.url, channels.lang,
   channels.icon_path, channels.hosts, channels.active, channels.rust_centered,
@@ -42,7 +42,7 @@ const SQL_ALL_CHANNELS: &str =
 r#"
 with
 last_episodes as (select distinct on (channel_id) id as episode_id, channel_id, title, url, date_published
-  from episodes order by channel_id, date_published),
+  from episodes order by channel_id, date_published desc),
 count_episodes as (select channel_id, count(*) as total_episodes from episodes group by channel_id)
 select channels.id as channel_id, channels.name, channels.description, channels.url, channels.lang,
   channels.icon_path, channels.hosts, channels.active, channels.rust_centered,
