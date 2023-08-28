@@ -65,6 +65,35 @@ pub async fn channels(state: web::Data<AppState>) -> impl Responder {
     HttpResponse::Ok().body(rendered)
 }
 
+#[get("/channel/{number}.html")]
+pub async fn channel(path_channel_id: web::Path<u32>, state: web::Data<AppState>) -> impl Responder {
+    let repository: &dyn PodcastsRepository = &state.repository;
+    let mut ctx = Context::new();
+    ctx.insert("page_id", "channel");
+    let channel_id = path_channel_id.into_inner();
+    let template_html = match repository.get_channel(channel_id).await {
+        Ok(opt_channel_with_episodes) => {
+            match opt_channel_with_episodes {
+                Some(channel_with_episodes) => {
+                    ctx.insert("channel_with_episodes", &channel_with_episodes);
+                    "channel.html"
+                },
+                None => {
+                    log::warn!("No channel found with id {}", channel_id);
+                    "error.html"
+                }
+            }
+        },
+        Err(query_error) => {
+            log::error!("{}", query_error);
+            "error.html"
+        }
+    };
+    let rendered = state.tera.render(template_html, &ctx).unwrap();
+    HttpResponse::Ok().body(rendered)
+}
+
+
 #[get("/about.html")]
 pub async fn about(state: web::Data<AppState>) -> impl Responder {
     let mut ctx = Context::new();

@@ -1,58 +1,8 @@
 pub mod postgres;
-mod from_db;
+mod db_types;
 
 use std::fmt;
-use chrono::NaiveDate;
-use serde::{Serialize, Deserialize};
-use crate::model::{EpisodeLast, ChannelWithLastEpisode};
-
-#[derive(Serialize, Deserialize, Debug, Clone, sqlx::FromRow)]
-pub struct Episode {
-    id: i64,
-    channel_id: i64,
-    title: String,
-    guests: Option<String>,
-    description: String,
-    lang: String,
-    url: String,
-    date_published: NaiveDate,
-    duration_seconds: i32,
-    icon_path: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, sqlx::FromRow)]
-pub struct EpisodeLastDb {
-    id: i64,
-    channel_id: i64,
-    channel_name: String,
-    title: String,
-    guests: Option<String>,
-    description_summary: String,
-    lang: String,
-    url: String,
-    date_published: NaiveDate,
-    duration_seconds: i32,
-    icon_path: Option<String>,
-    channel_icon_path: Option<String>
-}
-
-#[derive(Serialize, Debug, sqlx::FromRow)]
-pub struct ChannelWithLastEpisodeDb {
-    channel_id: i64,
-    name: String,
-    description: String,
-    url: String,
-    lang: String,
-    icon_path: Option<String>,
-    hosts: Option<String>,
-    last_episode_id: i64,
-    last_episode_title: String,
-    last_episode_url: String,
-    last_episode_date_published: NaiveDate,
-    total_episodes: Option<i64>,
-    active: bool,
-    rust_centered: bool
-}
+use crate::model::{EpisodeLast, ChannelWithLastEpisode, ChannelWithEpisodes};
 
 #[derive(Debug, Clone)]
 pub struct QueryError {
@@ -80,6 +30,7 @@ pub trait PodcastsRepository: Send + Sync + 'static {
     async fn get_last_episodes(&self) -> ResultQuery<Vec<EpisodeLast>>;
     async fn  get_rust_active_channels(&self) -> ResultQuery<Vec<ChannelWithLastEpisode>>;
     async fn get_all_channels(&self) -> ResultQuery<Vec<ChannelWithLastEpisode>>;
+    async fn get_channel(&self, id: u32) -> ResultQuery<Option<ChannelWithEpisodes>>;
     // async fn get_film(&self, id: &Uuid) -> FilmResult<Film>;
     // async fn create_film(&self, id: &CreateFilm) -> FilmResult<Film>;
     // async fn update_film(&self, id: &Film) -> FilmResult<Film>;

@@ -11,11 +11,11 @@ lib = { workspace = true }
 actix-web = { workspace = true }
 actix-files = { workspace = true }
 
-shuttle-actix-web = "0.23"
-shuttle-runtime = "0.23"
+shuttle-actix-web = "0.25"
+shuttle-runtime = "0.25"
 tokio = "1.30.0"
-shuttle-shared-db = { version = "0.23", features = ["postgres", "sqlx"] }
-shuttle-static-folder = "0.23"
+shuttle-shared-db = { version = "0.25", features = ["postgres", "sqlx"] }
+shuttle-static-folder = "0.25"
 chrono = { version = "0.4", features = ["serde"] }
 tera = "1"
 

@@ -40,6 +40,7 @@ async fn actix_web(
             .wrap(Logger::default())
             .service(routes::html::index)
             .service(routes::html::channels)
+            .service(routes::html::channel)
             .service(routes::html::about)
         );
     };
