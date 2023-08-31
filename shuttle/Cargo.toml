@@ -13,7 +13,7 @@ actix-files = { workspace = true }
 
 shuttle-actix-web = "0.25"
 shuttle-runtime = "0.25"
-tokio = "1.30.0"
+tokio = "1.32"
 shuttle-shared-db = { version = "0.25", features = ["postgres", "sqlx"] }
 shuttle-static-folder = "0.25"
 chrono = { version = "0.4", features = ["serde"] }

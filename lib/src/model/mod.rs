@@ -12,6 +12,7 @@ pub struct Episode {
     pub url: String,
     pub date_published: NaiveDate,
     pub duration_seconds: i32,
+    pub duration: String,
     pub icon_path: Option<String>,
 }
 

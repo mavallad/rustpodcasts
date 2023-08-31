@@ -67,6 +67,7 @@ pub fn to_channel_with_episodes(vec_of_channel_and_episode: Vec<ChannelAndEpisod
                     url: channel_and_episode.episode_url.clone().unwrap(),
                     date_published: channel_and_episode.episode_date_published.clone().unwrap(),
                     duration_seconds: channel_and_episode.episode_duration_seconds.unwrap(),
+                    duration: format_hours_minutes_seconds(channel_and_episode.episode_duration_seconds.unwrap()),
                     icon_path: channel_and_episode.episode_icon_path.clone()
                 });
             }

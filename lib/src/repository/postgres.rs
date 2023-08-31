@@ -67,8 +67,8 @@ select channels.id as channel_id, channels.name as channel_name, channels.descri
 from channels
 left join episodes on channels.id = episodes.channel_id
 where channels.id = $1
+order by episodes.date_published desc
 "#;
-
 
 
 #[derive(Clone)]

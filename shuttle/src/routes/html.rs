@@ -11,7 +11,7 @@ use tera::Context;
 
 #[get("/")]
 pub async fn index(state: web::Data<AppState>) -> impl Responder {
-    let repository: &dyn PodcastsRepository = &state.repository;
+    let repository = &state.repository;
     let lastest_episodes_data = match repository.get_last_episodes().await {
         Ok(episodes) => episodes,
         Err(query_error) => { log::error!("{}", query_error); vec![] }
@@ -40,7 +40,7 @@ pub async fn index(state: web::Data<AppState>) -> impl Responder {
 
 #[get("/channels.html")]
 pub async fn channels(state: web::Data<AppState>) -> impl Responder {
-    let repository: &dyn PodcastsRepository = &state.repository;
+    let repository = &state.repository;
     let mut ctx = Context::new();
     ctx.insert("page_id", "channels");
     let template_html = match repository.get_all_channels().await {
@@ -67,7 +67,7 @@ pub async fn channels(state: web::Data<AppState>) -> impl Responder {
 
 #[get("/channel/{number}.html")]
 pub async fn channel(path_channel_id: web::Path<u32>, state: web::Data<AppState>) -> impl Responder {
-    let repository: &dyn PodcastsRepository = &state.repository;
+    let repository = &state.repository;
     let mut ctx = Context::new();
     ctx.insert("page_id", "channel");
     let channel_id = path_channel_id.into_inner();

@@ -15,20 +15,25 @@
     <h2 class="section-title">Rust Specific Podcasts</h2>
     {% for channel in rust_channels %}
     <div class="item-new-channel">
-        <div class="image-description-new-channel">
-            {% if channel.icon_path %}
-                {% set icon_path = channel.icon_path %}
-            {% else %}
-                {% set icon_path = "images/default_icon.png" %}
-            {% endif %}
-            <div class="channel-image">
-                <img src="{{icon_path}}" alt="Icon {{channel.name}}">
+        
+            <div class="image-description-new-channel">
+                {% if channel.icon_path %}
+                    {% set icon_path = channel.icon_path %}
+                {% else %}
+                    {% set icon_path = "images/default_icon.png" %}
+                {% endif %}
+                <div class="channel-image">
+                    <a href="/channel/{{channel.channel_id}}.html" class="channel-link">
+                        <img src="{{icon_path}}" alt="Icon {{channel.name}}">
+                    </a>
+                </div>
+                <div class="description-new-channel">
+                    <a href="/channel/{{channel.channel_id}}.html" class="channel-link">
+                        <h3>{{channel.name}}</h3>
+                    </a>
+                    <p>{{channel.description}}</p>
+                </div>
             </div>
-            <div class="description-new-channel">
-                <h3>{{channel.name}}</h3>
-                <p>{{channel.description}}</p>
-            </div>
-        </div>
         <div class="data-new-channel">
             {% if channel.hosts %}
             <div class="channel-hosts">
@@ -36,23 +41,25 @@
             </div>
             {% endif %}
             <div class="channel-url">
-                <img alt="World icon" src="images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
+                <img alt="World icon" src="/images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
             </div>
             {% if not channel.active %}
             <div class='inactive'>INACTIVE</div>
             {% endif %}
             <div class="channel-last-episode">
-                Last publication: <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" />
+                Last publication: <img alt="Listen icon" src="/images/text_to_speech.png" class="icon-square" />
                 <a href="{{channel.last_episode_url}}" >{{channel.last_episode_title}}</a>
             </div>
             <div class="channel-data-row">
                 <span>
-                    <img alt="Number icon" src="images/numbers.png" class="icon-square" />
-                    {{channel.total_episodes}}
-                    {% if channel.total_episodes > 1 %}episodes{% else %}episode{% endif %}
+                    <a href="/channel/{{channel.channel_id}}.html" class="channel-link">
+                        <img alt="Number icon" src="images/numbers.png" class="icon-square" />
+                        {{channel.total_episodes}}
+                        {% if channel.total_episodes > 1 %}episodes{% else %}episode{% endif %}
+                    </a>
                 </span>
-                <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
-                <span><img alt="Language icon" class="image-lang" src="images/languages/{{channel.lang}}.svg"></span>
+                <span><img alt="Calendar icon" src="/images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
+                <span><img alt="Language icon" class="image-lang" src="/images/languages/{{channel.lang}}.svg"></span>
             </div>
         </div>
     </div>
@@ -66,13 +73,17 @@
             {% if channel.icon_path %}
                 {% set icon_path = channel.icon_path %}
             {% else %}
-                {% set icon_path = "images/default_icon.png" %}
+                {% set icon_path = "/images/default_icon.png" %}
             {% endif %}
             <div class="channel-image">
-                <img src="{{icon_path}}" alt="Icon {{channel.name}}">
+                <a href="/channel/{{channel.channel_id}}.html" class="channel-link">
+                    <img src="{{icon_path}}" alt="Icon {{channel.name}}">
+                </a>
             </div>
             <div class="description-new-channel">
-                <h3>{{channel.name}}</h3>
+                <a href="/channel/{{channel.channel_id}}.html" class="channel-link">
+                    <h3>{{channel.name}}</h3>
+                </a>
                 <p>{{channel.description}}</p>
             </div>
         </div>
@@ -83,19 +94,22 @@
           </div>
           {% endif %}
           <div class="channel-url">
-            <img alt="World icon" src="images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
+            <img alt="World icon" src="/images/captive_portal.png" class="icon-square" /> <a href="{{channel.url}}">{{channel.url}}</a>
           </div>
           <div class="channel-last-episode">
               Last Rust related publication: <img alt="Listen icon" src="images/text_to_speech.png" class="icon-square" />
               <a href="{{channel.last_episode_url}}" >{{channel.last_episode_title}}</a>
           </div>
           <div class="channel-data-row">
-            <span><img alt="Number icon" src="images/numbers.png" class="icon-square" />
-                {{channel.total_episodes}}
-                {% if channel.total_episodes > 1 %}episodes{% else %}episode{% endif %}
+            <span>
+                <a href="/channel/{{channel.channel_id}}.html" class="channel-link">
+                    <img alt="Number icon" src="/images/numbers.png" class="icon-square" />
+                    {{channel.total_episodes}}
+                    {% if channel.total_episodes > 1 %}episodes{% else %}episode{% endif %}
+                </a>
             </span>
-            <span><img alt="Calendar icon" src="images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
-            <span><img alt="Language icon" class="image-lang" src="images/languages/{{channel.lang}}.svg"></span>
+            <span><img alt="Calendar icon" src="/images/calendar_month.png" class="icon-square" /> {{channel.last_episode_date_published}}</span>
+            <span><img alt="Language icon" class="image-lang" src="/images/languages/{{channel.lang}}.svg"></span>
           </div>
         </div>
     </div>

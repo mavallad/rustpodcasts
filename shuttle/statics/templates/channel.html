@@ -11,5 +11,70 @@
 {% endblock header %}
 
 {% block content %}
-{{channel_with_episodes.channel_id}}
+<div class="item-channel">
+    <div class="image-description-channel">
+        {% if channel_with_episodes.icon_path %}
+            {% set icon_path = channel_with_episodes.icon_path %}
+        {% else %}
+            {% set icon_path = "/images/default_icon.png" %}
+        {% endif %}
+        <div class="channel-image">
+            <img src="{{icon_path}}" alt="Icon {{channel_with_episodes.name}}">
+        </div>
+        <div class="description-channel">
+            <h3>{{channel_with_episodes.name}}</h3>
+            <p>{{channel_with_episodes.description}}</p>
+        </div>
+    </div>
+    <div class="data-channel">
+        {% if channel_with_episodes.hosts %}
+        <div class="channel-hosts">
+            Host: {{channel_with_episodes.hosts}}
+        </div>
+        {% endif %}
+        <div class="channel-url">
+            <img alt="World icon" src="/images/captive_portal.png" class="icon-square" /> <a href="{{channel_with_episodes.url}}">{{channel_with_episodes.url}}</a>
+        </div>
+        {% if not channel_with_episodes.active %}
+        <div class='inactive'>INACTIVE</div>
+        {% endif %}
+        <span><img alt="Language icon" class="image-lang" src="/images/languages/{{channel_with_episodes.lang}}.svg"></span>
+    </div>
+</div>
+
+<h2 class="section-title">Episodes</h2>
+{% for episode in channel_with_episodes.episodes %}
+<div class="item-new-episode">
+    <div class="image-description-new-episode">
+        <div class="episode-image">
+            {% if episode.icon_path %}
+                {% set icon_path = episode.icon_path %}
+            {% else %}
+                {% set icon_path = channel_with_episodes.icon_path %}
+            {% endif %}
+            <img src="{{icon_path}}" alt="Icon {{episode.title}}">
+        </div>
+        <div class="description-new-episode">
+            <h3>{{episode.title}}</h3>
+            <p>{{episode.description}}</p>
+        </div>
+    </div>
+    <div class="data-new-episode">
+        <div class="episode-url">
+            <img alt="World icon" src="/images/captive_portal.png" class="icon-square" /> <a href="{{episode.url}}">{{episode.url}}</a>
+        </div>
+        <div class="episode-data-row">
+            <span>
+                <img alt="Calendar icon" src="/images/calendar_month.png" class="icon-square" /> {{episode.date_published}}
+            </span>
+            <span>
+                <img alt="Time icon" src="/images/timer.png" class="icon-square" /> {{episode.duration}}
+            </span>
+            <span>
+                <img alt="Language icon" class="image-lang" src="/images/languages/{{episode.lang}}.svg">
+            </span>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock content %}
