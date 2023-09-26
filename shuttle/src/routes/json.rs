@@ -3,7 +3,7 @@ use actix_web::{
     web::{self, Json},
     Result
 };
-use shuttle_runtime::tracing::log;
+use tracing::log;
 use lib::model::{EpisodeLast, ChannelWithLastEpisode};
 use crate::common::AppState;
 use lib::repository::PodcastsRepository;

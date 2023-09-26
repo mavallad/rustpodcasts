@@ -1,6 +1,5 @@
 use actix_web::{web::{self, ServiceConfig}, middleware::Logger};
 use shuttle_actix_web::ShuttleActixWeb;
-use std::path::PathBuf;
 use sqlx::postgres::PgPool;
 use lib::repository::postgres::PostgresPodcastsRepository;
 use common::AppState;
@@ -12,13 +11,12 @@ mod routes;
 #[shuttle_runtime::main]
 async fn actix_web(
     #[shuttle_shared_db::Postgres()] pool: PgPool,
-    #[shuttle_static_folder::StaticFolder(folder = "statics")] static_folder: PathBuf
 ) -> ShuttleActixWeb<impl FnOnce(&mut ServiceConfig) + Send + Clone + 'static> {
     sqlx::migrate!().run(&pool).await.expect("Migrations failed :(");
 
-    let tera_templates_path_pattern = format!("{}/templates/*.html", static_folder.to_string_lossy());
-    let css_files_path = format!("{}/public/css/", static_folder.to_string_lossy());
-    let image_files_path = format!("{}/public/images/", static_folder.to_string_lossy());
+    let tera_templates_path_pattern = "statics/templates/*.html";
+    let css_files_path = "statics/public/css/";
+    let image_files_path = "statics/public/images/";
     let tera = Tera::new(&tera_templates_path_pattern).unwrap();
 
     let repository: PostgresPodcastsRepository = PostgresPodcastsRepository::new(pool);

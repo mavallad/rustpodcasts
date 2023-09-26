@@ -4,7 +4,7 @@ use actix_web::{
     HttpResponse,
     Responder
 };
-use shuttle_runtime::tracing::log;
+use tracing::log;
 use crate::common::AppState;
 use lib::repository::PodcastsRepository;
 use tera::Context;
