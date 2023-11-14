@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
-{% block title %}Channel page rustpodcasts{% endblock title %}
+{% block title %}Channel {{channel_with_episodes.name}}{% endblock title %}
+{% block meta_description %}Channel information and episodes for {{channel_with_episodes.name}}{% endblock meta_description %}
 
 {% block head %}
     {{ super() }}
